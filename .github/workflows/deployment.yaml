@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-deploy:
-    runs-on: self-hosted  # Use the self-hosted runner      #test
+    runs-on: self-hosted  # Use the self-hosted runner
 
     steps:
       - name: Checkout code
@@ -27,7 +27,7 @@ jobs:
         run: docker build -t myapp:${{ env.IMAGE_VERSION }} .
 
       - name: Tag Docker image for Harbor
-        run: docker tag harbor.mydomain.com:9087/test/myapp:${{ env.IMAGE_VERSION }}
+        run: docker tag myapp:${{ env.IMAGE_VERSION }} harbor.mydomain.com:9087/test/myapp:${{ env.IMAGE_VERSION }}
 
       - name: Push Docker image to Harbor
         run: docker push harbor.mydomain.com:9087/test/myapp:${{ env.IMAGE_VERSION }}
