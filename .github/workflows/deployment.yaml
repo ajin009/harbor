@@ -20,17 +20,11 @@ jobs:
           username: ${{ secrets.HARBOR_USERNAME }}
           password: ${{ secrets.HARBOR_PASSWORD }}
 
-#      - name: Build Docker image
-#        env:
-#          JFROG_USERNAME: ${{ secrets.JFROG_USERNAME }}
-#          JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }}
-#          JFROG_REPO_URL: ${{ secrets.JFROG_REPO_URL }}
-#        run: |
-#          echo ${JFROG_USERNAME} ${JFROG_URL}
-#          docker build --build-arg JFROG_USERNAME=${JFROG_USERNAME} \
-#                       --build-arg JFROG_PASSWORD=${JFROG_PASSWORD} \
-#                       --build-arg JFROG_REPO_URL=${JFROG_REPO_URL} \
-#                       -t sanjaypramod/python-app:v${{ env.revision }} .
-# 
-#      - name: Push Docker image to dockerhub
-#        run: docker push sanjaypramod/python-app:v${{ env.revision }}
+      - name: Set Docker image version
+        run: echo "IMAGE_VERSION=v${{ github.run_number }}" >> $GITHUB_ENV
+
+      - name: Build Docker image
+        run: docker build -t harbor.mydomain.com:9087/myapp:${{ env.IMAGE_VERSION }} .
+        
+
+
