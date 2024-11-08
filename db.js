@@ -1,6 +1,6 @@
 const { MongoClient, ObjectId } = require('mongodb')
 
-const connectionUrl = 'mongodb://localhost:27017'
+const connectionUrl = 'mongodb://172.30.90.176:27017/myappdb'
 const dbName = 'store'
 
 let db

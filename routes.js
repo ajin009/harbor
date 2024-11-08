@@ -8,7 +8,9 @@ const itemSchema = Joi.object().keys({
   name: Joi.string(),
   quantity: Joi.number().integer().min(0)
 })
-
+router.get('/health', (req, res) =>{
+res.status(200).send("server is alive")
+})
 router.post('/item', (req, res) => {
   const item = req.body
   console.log(req.body)
