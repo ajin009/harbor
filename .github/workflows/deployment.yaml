@@ -26,5 +26,8 @@ jobs:
       - name: Build Docker image
         run: docker build -t harbor.mydomain.com:9087/myapp:${{ env.IMAGE_VERSION }} .
         
+      - name: Push Docker image
+        run: docker push harbor.mydomain.com:9087/myapp:${{ env.IMAGE_VERSION }}
+        
 
 
