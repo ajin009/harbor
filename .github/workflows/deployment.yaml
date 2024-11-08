@@ -1,4 +1,4 @@
-name: Build, Push, and Deploy
+name: Build, Tag, and Push to Harbor
 
 on:
   push:
@@ -24,10 +24,10 @@ jobs:
         run: echo "IMAGE_VERSION=v${{ github.run_number }}" >> $GITHUB_ENV
 
       - name: Build Docker image
-        run: docker build -t harbor.mydomain.com:9087/myapp:${{ env.IMAGE_VERSION }} .
-        
-      - name: Push Docker image
-        run: docker push harbor.mydomain.com:9087/myapp:${{ env.IMAGE_VERSION }}
-        
+        run: docker build -t myapp:${{ env.IMAGE_VERSION }} .
 
+      - name: Tag Docker image for Harbor
+        run: docker tag myapp:${{ env.IMAGE_VERSION }} harbor.mydomain.com:9087/test/myapp:${{ env.IMAGE_VERSION }}
 
+      - name: Push Docker image to Harbor
+        run: docker push harbor.mydomain.com:9087/test/myapp:${{ env.IMAGE_VERSION }}
