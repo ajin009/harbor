@@ -30,7 +30,7 @@ jobs:
         run: docker build -t harbor.mydomain.com:9087/test/myapp:${{ env.IMAGE_VERSION }} .
 
       - name: Tag Docker image for Harbor
-        run: docker tag myapp:${{ env.IMAGE_VERSION }} harbor.mydomain.com:9087/test/myapp:${{ env.IMAGE_VERSION }}
+        run: docker tag harbor.mydomain.com:9087/test/myapp:${{ env.IMAGE_VERSION }}
 
       - name: Push Docker image to Harbor
         run: docker push harbor.mydomain.com:9087/test/myapp:${{ env.IMAGE_VERSION }}
